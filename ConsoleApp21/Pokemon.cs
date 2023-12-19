@@ -17,7 +17,7 @@ namespace ConsoleApp21
             Health = health;
             Damage = damage;
         }
-       public void Scratch(Pokemon actor, Pokemon receiver)
+        public void Scratch(Pokemon actor, Pokemon receiver)
         {
             receiver.Health -= actor.Damage;
         }
@@ -48,6 +48,10 @@ namespace ConsoleApp21
                 Console.WriteLine($"{actor.Name} went to sleep. It regained health");
             }
             else { Console.WriteLine("OpponentAction 'if' statement issue"); }
+        }
+        public void PokeDex()
+        {
+            Console.WriteLine($"Pokemon stats. Name: {Name}, Health: {Health}, Damage: {Damage}.");
         }
     }
 }

@@ -1,48 +1,72 @@
 ﻿using ConsoleApp21;
 
-Encounter();
-void Encounter()
-{
-    var charmander = new Pokemon("Charmander", 5, 2);
-    var squirtle = new Pokemon("Squirtle", 6, 1);
+var trainer = new Trainer();
+trainer.CreateTrainer();
+var pokemon = new Pokemon("Charmander", 5, 2);        // player pokemon
+var opponent = new Pokemon("Wild Squirtle", 6, 1);    // opponent pokemon
 
-    Console.WriteLine("Wild Squirtle appeared.");
-    Console.WriteLine("Go Charmander!");
-    while (charmander.Health > 0 && squirtle.Health > 0)
+SelectPokemon();
+void SelectPokemon()
+{
+    Console.WriteLine("Which starting pokemon will you choose?");
+    Console.WriteLine("Charmander(1), Squirtle(2) or Banana(3)");
+    var input = Console.ReadLine();
+    if (input == "1") { Console.WriteLine($"You chose {pokemon.Name}"); } 
+    else if (input == "2") {
+        pokemon.Name = "Squirtle"; pokemon.Health = 6; pokemon.Damage = 1;
+        Console.WriteLine($"You chose {pokemon.Name}");
+    }
+    else if (input == "3")
+    {
+        pokemon.Name = "Banana"; pokemon.Health = 3; pokemon.Damage = 4;
+        Console.WriteLine($"You chose {pokemon.Name}");
+    }
+    else
+    {
+        Console.WriteLine($"'{input}' is not a valid input. Enter a number 1,2 or 3");
+    }
+}
+
+Encounter();
+ void Encounter()
+{
+    Console.WriteLine($"{opponent.Name} appeared.");
+    Console.WriteLine($"Go {pokemon.Name}!");
+    while (pokemon.Health > 0 && opponent.Health > 0)
     {
         Console.WriteLine("Scratch(1) Growl(2) Snooze(3)");
         var input = Console.ReadLine();
         switch (input)
         {
             case "1":
-                charmander.Scratch(charmander, squirtle);
-                Console.WriteLine($"Charmander scratched Squirtle for {charmander.Damage} damage");
-                Console.WriteLine($"Squirtle has {squirtle.Health} health remaining");
+                pokemon.Scratch(pokemon, opponent);
+                Console.WriteLine($"{pokemon.Name} scratched {opponent.Name} for {pokemon.Damage} damage");
+                Console.WriteLine($"{opponent.Name} has {opponent.Health} health remaining");
                 Console.ReadLine();
-                squirtle.OpponentAction(squirtle, charmander);
+                opponent.OpponentAction(opponent, pokemon);
                 Console.ReadLine();
                 break;
             case "2":
-                charmander.Growl(charmander);
-                Console.WriteLine($"Charmander used growl. Its power grows..");
+                pokemon.Growl(pokemon);
+                Console.WriteLine($"{pokemon.Name} used growl. Its power grows..");
                 Console.ReadLine();
-                squirtle.OpponentAction(squirtle, charmander);
+                opponent.OpponentAction(opponent, pokemon);
                 Console.ReadLine();
                 break;
             case "3":
-                charmander.Snooze(charmander);
-                Console.WriteLine($"Charmander went to sleep. It regained health");
+                pokemon.Snooze(pokemon);
+                Console.WriteLine($"{pokemon.Name} went to sleep. It regained health");
                 Console.ReadLine();
-                squirtle.OpponentAction(squirtle, charmander);
+                opponent.OpponentAction(opponent, pokemon);
                 Console.ReadLine();
                 break;
             default:
-                Console.WriteLine($"{input} is not a valid input. Enter a number 1,2 or 3");
+                Console.WriteLine($"'{input}' is not a valid input. Enter a number 1,2 or 3");
                 break;
         }
     }
     Console.WriteLine("The battle has concluded!");
-    Console.WriteLine($"Charmander has {charmander.Health} health remaining, while Squirtle has {squirtle.Health}");
+    Console.WriteLine($"{pokemon.Name} has {pokemon.Health} health remaining while {opponent.Name} has {opponent.Health}");
 }
 
 Console.ReadLine();

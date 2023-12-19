@@ -4,7 +4,7 @@ Encounter();
 void Encounter()
 {
     var charmander = new Pokemon("Charmander", 5, 2);
-    var squirtle = new Pokemon("Squirtle", 4, 1);
+    var squirtle = new Pokemon("Squirtle", 6, 1);
 
     Console.WriteLine("Wild Squirtle appeared.");
     Console.WriteLine("Go Charmander!");

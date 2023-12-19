@@ -29,23 +29,23 @@ namespace ConsoleApp21
         {
             actor.Health += 5;
         }
-        public void OpponentAction(Pokemon a, Pokemon b)
+        public void OpponentAction(Pokemon actor, Pokemon receiver)
         {
             var rand = new System.Random();
             var randomNumber = rand.Next(1, 4);
             if (randomNumber == 1) {
-                Scratch(a,b);
-                Console.WriteLine($"{a.Name} scratched {b.Name} for {a.Damage} damage");
-                Console.WriteLine($"{b.Name} has {b.Health} health left");
+                Scratch(actor,receiver);
+                Console.WriteLine($"{actor.Name} scratched {receiver.Name} for {actor.Damage} damage");
+                Console.WriteLine($"{receiver.Name} has {receiver.Health} health left");
             }
             else if (randomNumber == 2){
-                Growl(a);
-                Console.WriteLine($"{a.Name} used growl. Its power grows..");
+                Growl(actor);
+                Console.WriteLine($"{actor.Name} used growl. Its power grows..");
             }
             else if (randomNumber == 3)
             {
-                Snooze(a);
-                Console.WriteLine($"{a.Name} went to sleep. It regained health");
+                Snooze(actor);
+                Console.WriteLine($"{actor.Name} went to sleep. It regained health");
             }
             else { Console.WriteLine("OpponentAction 'if' statement issue"); }
         }

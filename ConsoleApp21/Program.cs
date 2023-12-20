@@ -1,15 +1,15 @@
 ﻿using ConsoleApp21;
 
-var trainer = new Trainer();
-trainer.CreateTrainer();
-var pokemon = new Pokemon("Charmander", 5, 2);        // player pokemon
-var opponent = new Pokemon("Wild Squirtle", 6, 1);    // opponent pokemon
+// var trainer = new Trainer(); 
+// trainer.CreateTrainer();
+var pokemon = new Pokemon("Charmander", 5, 2, 1, 1000);        // player pokemon
+var opponent = new Pokemon("Wild Squirtle", 6, 1, 1, 1000);    // opponent pokemon
 
 SelectPokemon();
-void SelectPokemon()
+void SelectPokemon() 
 {
-    Console.WriteLine("Which starting pokemon will you choose?");
-    Console.WriteLine("Charmander(1), Squirtle(2) or Banana(3)");
+    Console.WriteLine("Which pokemon will you choose?");
+    Console.WriteLine("Charmander(1), Squirtle(2) or Pikachu(3)");
     var input = Console.ReadLine();
     if (input == "1") { Console.WriteLine($"You chose {pokemon.Name}"); } 
     else if (input == "2") {
@@ -18,55 +18,42 @@ void SelectPokemon()
     }
     else if (input == "3")
     {
-        pokemon.Name = "Banana"; pokemon.Health = 3; pokemon.Damage = 4;
+        pokemon.Name = "Pikachu"; pokemon.Health = 4; pokemon.Damage = 3;
         Console.WriteLine($"You chose {pokemon.Name}");
+    }
+    else if (input == "4") // for testing purposes
+    {
+        pokemon.Name = "Banana"; pokemon.Health = 99; pokemon.Damage = 99;
+        Console.WriteLine($"You chose {pokemon.Name}. I don't remember this pokemon..?");
     }
     else
     {
         Console.WriteLine($"'{input}' is not a valid input. Enter a number 1,2 or 3");
     }
 }
-
-Encounter();
- void Encounter()
+Menu();
+ void Menu()
 {
-    Console.WriteLine($"{opponent.Name} appeared.");
-    Console.WriteLine($"Go {pokemon.Name}!");
-    while (pokemon.Health > 0 && opponent.Health > 0)
-    {
-        Console.WriteLine("Scratch(1) Growl(2) Snooze(3)");
+        Console.WriteLine("Where do you want to go next?");
+        Console.WriteLine("Pokemon safari(1), Pokemon Center(2), Gym(3), PokeDex(4)");
         var input = Console.ReadLine();
-        switch (input)
-        {
-            case "1":
-                pokemon.Scratch(pokemon, opponent);
-                Console.WriteLine($"{pokemon.Name} scratched {opponent.Name} for {pokemon.Damage} damage");
-                Console.WriteLine($"{opponent.Name} has {opponent.Health} health remaining");
-                Console.ReadLine();
-                opponent.OpponentAction(opponent, pokemon);
-                Console.ReadLine();
-                break;
-            case "2":
-                pokemon.Growl(pokemon);
-                Console.WriteLine($"{pokemon.Name} used growl. Its power grows..");
-                Console.ReadLine();
-                opponent.OpponentAction(opponent, pokemon);
-                Console.ReadLine();
-                break;
-            case "3":
-                pokemon.Snooze(pokemon);
-                Console.WriteLine($"{pokemon.Name} went to sleep. It regained health");
-                Console.ReadLine();
-                opponent.OpponentAction(opponent, pokemon);
-                Console.ReadLine();
-                break;
-            default:
-                Console.WriteLine($"'{input}' is not a valid input. Enter a number 1,2 or 3");
-                break;
-        }
+        if (input == "1") { Console.WriteLine("You take a walk in the grass hoping to find some pokemon"); pokemon.PokemonSafari(pokemon, opponent); Menu(); }
+        else if (input == "2") { Console.WriteLine("Your pokemon gets taken good care of and has its hitpoints replenished"); Menu(); }
+        else if (input == "3") { AccessGym(); Menu(); }
+        else if (input == "4") { pokemon.PokeDex(); Menu(); }
+        else { Console.WriteLine($"'{input}' is not a valid input. Enter a number 1,2 or 3"); Menu(); }
+}
+void AccessGym()
+{
+    if (pokemon.Level > 9) { Console.WriteLine("Congratulations! You can now challenge this gym"); }
+    else
+    {
+          Console.WriteLine("You need to be at least level 10 to challenge this gym."); 
+          Console.WriteLine("Come back when you are stronger!"); 
+          Console.ReadLine(); Menu();
     }
-    Console.WriteLine("The battle has concluded!");
-    Console.WriteLine($"{pokemon.Name} has {pokemon.Health} health remaining while {opponent.Name} has {opponent.Health}");
 }
 
-Console.ReadLine();
+Console.ForegroundColor = ConsoleColor.White;
+Console.WriteLine("To be continued. Thanks for playing!");
+Console.ReadLine( );

@@ -60,17 +60,25 @@ namespace ConsoleApp21
         {
             List<int> levelThresholds = new List<int> { 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000 };
 
+            int highestThreshold = 0;
+
             foreach (int threshold in levelThresholds)
             {
                 if (winner.Experience >= threshold)
                 {
-                    winner.Level++;
-                    Console.WriteLine($"{winner.Name} has leveled up! They are now level {winner.Level}");
+                    highestThreshold = threshold;
                 }
                 else
                 {
                     break;
                 }
+            }
+
+            if (highestThreshold > 0 && highestThreshold > winner.Level * 1000) 
+            {
+                int levelsGained = (highestThreshold / 1000) - winner.Level;
+                winner.Level += levelsGained;
+                Console.WriteLine($"{winner.Name} has leveled up {levelsGained} times! They are now level {winner.Level}");
             }
         }
         public void PokeDex()
@@ -133,7 +141,7 @@ namespace ConsoleApp21
         }
          void BattleSummary(Pokemon pokemon, Pokemon opponent)
         {
-            int battleExperience = 1000;
+          //  int battleExperience = 1000;
             Console.WriteLine("The battle has concluded!");
             Console.WriteLine($"{pokemon.Name} has {pokemon.Health} health remaining while {opponent.Name} has {opponent.Health}");
             Console.WriteLine();
@@ -141,9 +149,8 @@ namespace ConsoleApp21
             {
                 Console.WriteLine("You have won the battle");
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
-                Console.WriteLine($"{pokemon.Name} gained {battleExperience} XP!");
-                pokemon.Experience += battleExperience;
-              //  pokemon.Experience += opponent.Experience; 
+                Console.WriteLine($"{pokemon.Name} gained {opponent.Experience} XP!");
+                pokemon.Experience += opponent.Experience;
                 LevelUp(pokemon);
                 Console.ForegroundColor = ConsoleColor.Gray;
             }

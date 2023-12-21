@@ -39,7 +39,7 @@ Menu();
         var input = Console.ReadLine();
         if (input == "1") { Console.WriteLine("You take a walk in the grass hoping to find some pokemon"); pokemon.PokemonSafari(pokemon, opponent); Menu(); }
         else if (input == "2") { Console.WriteLine("Your pokemon gets taken good care of and has its hitpoints replenished"); Menu(); }
-        else if (input == "3") { AccessGym(); Menu(); }
+        else if (input == "3") { AccessGym(); }
         else if (input == "4") { pokemon.PokeDex(); Menu(); }
         else { Console.WriteLine($"'{input}' is not a valid input. Enter a number 1,2 or 3"); Menu(); }
 }

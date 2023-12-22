@@ -81,14 +81,6 @@ namespace ConsoleApp21
                 Console.WriteLine($"{winner.Name} has leveled up {levelsGained} times! They are now level {winner.Level}");
             }
         }
-        public void PokeDex()
-        {
-            Console.ForegroundColor= ConsoleColor.DarkYellow;
-            Console.WriteLine("PokeDex");
-            Console.WriteLine($"Name: {Name}, Health: {Health}, Damage: {Damage}, Level {Level}");
-            Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine();
-        }
        public void PokemonSafari(Pokemon pokemon, Pokemon opponent)
         {
             var rand = new Random();
